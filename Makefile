@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -g -Wall
-LIBS := -lcriterion
+LIBS := -lcriterion -lm
 
 SRCDIR := src
 TESTDIR := tests
@@ -43,6 +43,5 @@ test: $(TESTEXECS)
 
 run: 
 	@mkdir bin
-	gcc -o bin/a.out main.c src/problem.c && ./bin/a.out
-
+	gcc -o bin/a.out main.c src/float.c -lm && ./bin/a.out
 
