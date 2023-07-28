@@ -24,3 +24,15 @@ The main objective is just make it as example of how floats works in memory in C
 - main.c: Main function
 - src/*.c, *.h: Project files
 - tests/*.c: Unit Tests
+
+## How to run?
+
+#### Running main
+```
+$ make run
+```
+
+#### Running tests
+```
+$ make test
+```
