@@ -8,3 +8,4 @@
 
 // definitions
 unsigned int encode(double value);
+char* encodeToBits(double value);

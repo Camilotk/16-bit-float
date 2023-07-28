@@ -29,3 +29,20 @@ unsigned int encode(double value) {
 
     return 0;
 }
+
+// Function to convert an unsigned integer to its binary representation
+char* intToBinary(unsigned int num) {
+    static char binary[17]; // 16 bits + null terminator
+    for (int i = 15; i >= 0; i--) {
+        binary[15 - i] = ((num >> i) & 1) + '0'; // Extract each bit and convert to '0' or '1'
+    }
+    binary[16] = '\0'; // Null-terminate the string
+    return binary;
+}
+
+// Function to encode a double-precision floating-point number and return the binary representation
+char* encodeToBits(double value) {
+    unsigned int encoded = encode(value);
+    return intToBinary(encoded);
+}
+

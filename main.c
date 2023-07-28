@@ -9,5 +9,6 @@ int main (void)
     printf("Hello, World!\n");
 
     printf("%u \n", encode(value));
+    printf("%s \n", encodeToBits(value));
     return EXIT_SUCCESS;
 }
