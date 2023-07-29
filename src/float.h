@@ -1,5 +1,3 @@
-#include <stdbool.h>
-
 // Define the amount of bits reserved for expoent and mantissa
 #define EXP_BITS 5
 #define MANTISSA_BITS 10
