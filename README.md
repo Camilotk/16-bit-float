@@ -12,7 +12,7 @@ The implementation includes the following main functions:
 
 ---
 
-`unsigned int encode(double value)`
+### `unsigned int encode(double value)`
 
 Encodes a double-precision floating-point number into a 16-bit unsigned integer representation.
 
