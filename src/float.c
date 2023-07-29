@@ -66,13 +66,36 @@ char* inspect(double value) {
 
     // Print the inspection details with colored output
     sprintf(inspection, "The %.5f value is encoded in the value %u that is represented in memory as \x1b[32m%s\x1b[0m.\n\n", value, encoded, binaryString);
-    sprintf(inspection + strlen(inspection), "0                      = \x1b[34msign\x1b[0m, this is a %s number.\n", (encoded & (1 << NON_SIGN_BITS)) ? "negative" : "positive");
-    sprintf(inspection + strlen(inspection), "1-5                    = \x1b[34mpower\x1b[0m, in this case is the value \x1b[34m<%.5d>\x1b[0m in decimal.\n", (encoded >> MANTISSA_BITS) & 0b11111);
-    sprintf(inspection + strlen(inspection), "6-15                   = \x1b[34mmantissa\x1b[0m, in this case is the value \x1b[32m<%.5d>\x1b[0m in decimal.\n", encoded & 0b1111111111);
+    sprintf(inspection + strlen(inspection), "b[0]                      = \x1b[34msign\x1b[0m, this is a %s number.\n", (encoded & (1 << NON_SIGN_BITS)) ? "negative" : "positive");
+    sprintf(inspection + strlen(inspection), "b[1,5]                    = \x1b[34mpower\x1b[0m, in this case is the value \x1b[34m<%.5d>\x1b[0m in decimal.\n", (encoded >> MANTISSA_BITS) & 0b11111);
+    sprintf(inspection + strlen(inspection), "b[6,15]                   = \x1b[34mmantissa\x1b[0m, in this case is the value \x1b[32m<%.5d>\x1b[0m in decimal.\n", encoded & 0b1111111111);
 
     // Free the dynamically allocated memory for the binary string
     free(binaryString);
 
     return inspection;
+}
+
+float decode(unsigned int value) {
+    bool sign = (value & 0x8000) >> 15;
+    int exponent = (value & 0x7C00) >> 10;
+    int mantissa = (value & 0x03FF);
+
+    if (exponent == 0 && mantissa == 0) {
+        return sign ? -0.0f : 0.0f;
+    }
+
+    if (exponent == 0x1F) {
+        if (mantissa == 0) {
+            return sign ? -INFINITY : INFINITY;
+        } else {
+            return NAN;
+        }
+    }
+
+    int wholePart = exponent == 0 ? 0 : 1;
+    float percentage = (float)mantissa / 1024.0f;
+
+    return powf(-1, sign) * (wholePart + percentage) * powf(2, exponent - 15);
 }
 

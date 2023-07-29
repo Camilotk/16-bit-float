@@ -8,3 +8,4 @@
 unsigned int encode(double value);
 char* encodeToBits(double value);
 char* inspect(double value); 
+float decode(unsigned int value); 
