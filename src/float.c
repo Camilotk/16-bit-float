@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
-#include <stdlib.h>  
-#include <string.h>  
+#include <stdlib.h>
+#include <string.h>
 
 #include "float.h"
 
@@ -22,14 +22,12 @@ unsigned int encode(double value) {
     double upperBound = pow(2, exponent+1);
     exponent = (exponent + 15) & 0b11111;
 
-    // Calculate porcentage between bounds
+    // Calculate percentage between bounds
     double percentage = (fabs(value) - lowerBound) / (upperBound - lowerBound);
     unsigned int mantissa = (unsigned int) (1024 * percentage);
 
-    // Combine sign, exponent and mantissa
+    // Combine sign, exponent, and mantissa
     return (isNegative << NON_SIGN_BITS) | (exponent << MANTISSA_BITS) | mantissa;
-
-    return 0;
 }
 
 // Function to convert an unsigned integer to its binary representation
@@ -98,4 +96,3 @@ float decode(unsigned int value) {
 
     return powf(-1, sign) * (wholePart + percentage) * powf(2, exponent - 15);
 }
-
