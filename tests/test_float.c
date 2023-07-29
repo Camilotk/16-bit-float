@@ -6,19 +6,7 @@
 
 #include "../src/float.h"
 
-Test(decimal, create) {
-    double value = 12.52571;
-    unsigned int encoded = encode(value);
-
-    cr_assert(encoded == 19011, "12.52571 should be encoded as 19011!");
-}
-
-Test(binary, create) {
-    double value = 12.52571;
-    char* encoded = encodeToBits(value);
-
-    cr_assert_str_eq(encoded, "0100101001000011", "12.52571 should be encoded as 0100101001000011!");
-}
+// HELPERS
 
 // Helper function to check if a character is an ANSI escape code delimiter
 bool isEscapeDelimiter(char c) {
@@ -45,6 +33,22 @@ char* stripAnsiEscapeCodes(const char* str) {
     }
     result[j] = '\0';
     return result;
+}
+
+// TESTS
+
+Test(decimal, create) {
+    double value = 12.52571;
+    unsigned int encoded = encode(value);
+
+    cr_assert(encoded == 19011, "12.52571 should be encoded as 19011!");
+}
+
+Test(binary, create) {
+    double value = 12.52571;
+    char* encoded = encodeToBits(value);
+
+    cr_assert_str_eq(encoded, "0100101001000011", "12.52571 should be encoded as 0100101001000011!");
 }
 
 Test(inspect, positive_value) {

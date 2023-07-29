@@ -58,7 +58,7 @@ char* inspect(double value) {
     char* binaryString = intToBinary(encoded);
 
     // Allocate memory for the inspection string
-    char* inspection = (char*)malloc(256); // Adjust the size accordingly if needed
+    char* inspection = (char*) malloc(256); // Adjust the size accordingly if needed
     if (inspection == NULL) {
         printf("Memory allocation failed.\n");
         exit(EXIT_FAILURE);
