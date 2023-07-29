@@ -1,22 +1,49 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "src/float.h"
 
-int main(void) {
-    double value = 12.52571;
-    printf("Hello, World!\n");
+int main() {
+    char command;
+    float value;
+    unsigned int intValue;
+    char input[100];
 
-    printf("Encoded value: %u\n", encode(value));
-    printf("Encoded value in bits: %s\n", encodeToBits(value));
+    while (true) {
+        printf("Enter a command (e <float> / d <unsigned int> / i <float> / q): ");
+        fgets(input, sizeof(input), stdin);
+        sscanf(input, "%c", &command);
 
-    char* inspection = inspect(value);
-    printf("%s\n", inspection);
+        switch (command) {
+            case 'e':
+                sscanf(input, "%*c %f", &value);
+                unsigned int encodedValue = encode(value);
+                printf("Encoded value: %u\n", encodedValue);
+                break;
 
-    printf("Decoded value: %f\n", decode(encode(value)));
+            case 'd':
+                sscanf(input, "%*c %u", &intValue);
+                float decodedValue = decode(intValue);
+                printf("Decoded value: %f\n", decodedValue);
+                break;
 
-    // Free the dynamically allocated memory for the inspection string
-    free(inspection);
+            case 'i':
+                sscanf(input, "%*c %f", &value);
+                char *inspection = inspect(value);
+                printf("%s", inspection);
+                free(inspection);
+                break;
 
-    return EXIT_SUCCESS;
+            case 'q':
+                printf("Exiting. Have a nice week!\n");
+                return 0;
+
+            default:
+                printf("Invalid command. Please try again.\n");
+        }
+    }
+
+    return 0;
 }
