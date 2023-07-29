@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -g -Wall
-LIBS := -lcriterion -lm
+LIBS := -lm
 
 SRCDIR := src
 TESTDIR := tests
@@ -13,7 +13,8 @@ TESTFILES := $(wildcard $(TESTDIR)/*.c)
 OBJFILES := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRCFILES))
 TESTEXECS := $(patsubst $(TESTDIR)/%.c, $(TESTBINDIR)/%, $(TESTFILES))
 
-MAINEXEC := $(BINDIR)/main
+MAINFILE := main.c
+MAINEXEC := $(BINDIR)/a.out
 
 .PHONY: all clean test run
 
@@ -25,7 +26,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 $(MAINEXEC): $(OBJFILES)
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 clean:
 	rm -rf $(OBJDIR)
@@ -33,7 +34,7 @@ clean:
 
 $(TESTBINDIR)/%: $(TESTDIR)/%.c $(OBJFILES)
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS) -lcriterion
 
 test: $(TESTEXECS)
 	@for testexec in $(TESTEXECS); do \
@@ -41,7 +42,7 @@ test: $(TESTEXECS)
 		$$testexec; \
 	done
 
-run: 
-	@mkdir bin
-	gcc -o bin/a.out main.c src/float.c -lm && ./bin/a.out
-
+run:
+	@mkdir -p $(BINDIR)
+	$(CC) -o $(MAINEXEC) $(MAINFILE) $(SRCFILES) $(LIBS)
+	./$(MAINEXEC)
