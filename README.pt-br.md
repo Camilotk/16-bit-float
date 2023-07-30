@@ -154,3 +154,37 @@ unsigned int encode(double value);
 char* encodeToBits(double value);
 char* inspect(double value);
 float decode(unsigned int value);
+```
+
+## Uso
+
+### Importando o Cabeçalho
+
+Para usar a implementação de ponto flutuante IEEE 754 em seus próprios projetos, siga estes passos:
+
+1. Copie o arquivo de cabeçalho `float.h` do diretório `src` para o diretório de inclusões do seu projeto.
+2. Inclua o cabeçalho `float.h` em seus arquivos de origem onde você deseja usar as funções do IEEE 754.
+
+Exemplo:
+```c
+#include "path/to/float.h"
+
+int main() {
+    double value = 12.345;
+    unsigned int encoded = encode(value);
+    // Rest of the code
+    return 0;
+}
+```
+
+### Usando o REPL
+
+O projeto inclui um REPL (Read-Eval-Print Loop) que permite o uso interativo das funções do IEEE 754. O REPL suporta os seguintes comandos:
+
+- `e <número de ponto flutuante>`: Codifica o número de ponto flutuante fornecido e imprime o valor codificado.
+- `d <inteiro sem sinal>`: Decodifica o inteiro sem sinal de 16 bits fornecido e imprime o valor decodificado.
+- `i <número de ponto flutuante>`: Inspetiona o número de ponto flutuante fornecido e imprime a representação binária interna.
+- `q`: Sai do REPL.
+
+Para usar o REPL, basta executar o programa principal e digitar os comandos desejados.
+
