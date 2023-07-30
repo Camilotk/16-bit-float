@@ -18,7 +18,7 @@ To encode a double-precision floating-point number, the following steps are perf
 
 2. Check if the value is exactly zero. If so, return a special representation with all bits set to 0, except for the sign bit.
 
-3. Calculate the exponent by finding the power of 2 that the number falls between and adjust it to be biased by 15. The exponent range is from 1 to 30, with 0 and 31 reserved for special cases.
+3. Calculate the exponent by finding the power of 2 that the number falls between and adjust it to be biased by 15. The exponent range is from 0 to 31.
 
 4. Calculate the percentage between the two bounds of the exponent and convert it to a 10-bit mantissa value. The formula used to calculate the percentage is:
 
