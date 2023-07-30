@@ -188,3 +188,26 @@ O projeto inclui um REPL (Read-Eval-Print Loop) que permite o uso interativo das
 
 Para usar o REPL, basta executar o programa principal e digitar os comandos desejados.
 
+## Executando o Programa
+
+### Programa Principal
+
+Para executar o programa principal:
+
+1. Compile o programa usando o Makefile fornecido.
+```
+$ make run
+```
+2. O programa será iniciado com:
+```
+Enter a command (e <float> / d <unsigned int> / i <float> / q):
+```
+
+### Testes de Unidade
+
+Para executar os testes de unidade:
+```
+$ make test
+```
+
+Este comando irá compilar os testes e executá-los, fornecendo informações sobre os resultados dos testes.
