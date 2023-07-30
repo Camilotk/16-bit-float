@@ -44,9 +44,7 @@ To decode a 16-bit unsigned integer representation back to its equivalent double
 
 4. Combine the sign, whole part, and percentage to obtain the final decoded floating-point value.
 
-The formula for decoding can be represented as:
-
-$$ value = (-1)^{\text{sign}} \times (1 + \text{percentage}) \times 2^{\text{exponent} - 15} $$
+The formula for decoding can be represented as the same used in encoding.
 
 ### Range:
 
